@@ -16,7 +16,7 @@ async function getToDos(){
 
     const data = await res.json()
     console.log(data)
-    // document.querySelector('p').textContent = data.name
+    document.querySelector('p').textContent = data.name
     
 }
 
