@@ -8,8 +8,10 @@
     /.netlify/functions/todos path    route function     todos.js
 */
 
+import {categoryTemplates} from './templates/categories'
+console.log(categoryTemplates)
 
-async function getToDos(){
+/* async function getToDos(){
     const url = '/.netlify/functions/todos'
     const res = await fetch(url)
     console.log(res)
@@ -20,4 +22,22 @@ async function getToDos(){
     
 }
 
-getToDos()
+getToDos() */
+
+async function appInIt(){
+    const res = await fetch('.netlify/functions/todos')
+    const todos = await res.json()
+    const containerElement = document.createElement('div')
+    let markup = ``
+    todos.forEach(todo =>{
+        const template = categoryTemplates[todo.category](todo)
+        markup += template
+    })
+
+    containerElement.innerHTML = markup
+    document.querySelector('main').append(containerElement)
+}
+
+appInIt()
+
+
